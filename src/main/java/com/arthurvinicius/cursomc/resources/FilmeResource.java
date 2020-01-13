@@ -1,28 +1,29 @@
 package com.arthurvinicius.cursomc.resources;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arthurvinicius.cursomc.domain.Filme;
+import com.arthurvinicius.cursomc.services.FilmeService;
 
 @RestController
 @RequestMapping(value="/filmes")
 public class FilmeResource {
 
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Filme> listar() {
+	@Autowired
+	private FilmeService service;
+	
+	@RequestMapping(value="/{id}", method= RequestMethod.GET)
+	public ResponseEntity <?> find(@PathVariable Integer id) {
+	 Filme obj = service.find(id);
+	return ResponseEntity.ok().body(obj);
+	 
 		
-		Filme fil1 = new Filme(1, "ABC");
-		Filme fil2 = new Filme(1, "Arthuros");
-		
-		List<Filme> lista = new ArrayList<>();
-		lista.add(fil1);
-		lista.add(fil2);
-		
-		return lista;
+	
 	}
 }
