@@ -3,10 +3,10 @@ package com.arthurvinicius.cursomc.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.arthurvinicius.cursomc.domain.Filme;
+import com.arthurvinicius.cursomc.domain.SalaCinema;
 
 @Repository
-public interface FilmeRepositorys extends JpaRepository<Filme, Integer>{
+public interface SalaCinemaRepositorys extends JpaRepository<SalaCinema, Integer>{
 	//Filme findById(Integer id);
 	
 }

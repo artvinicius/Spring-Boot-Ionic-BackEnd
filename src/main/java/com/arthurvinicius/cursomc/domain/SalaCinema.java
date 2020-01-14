@@ -8,45 +8,60 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Filme implements Serializable {
+public class SalaCinema implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Integer id;
-	private String nomefilme;
+	private String hora;
 
-	@ManyToMany(mappedBy = "filmes")
-	private List<SalaCinema> filmes = new ArrayList<>();
+	@ManyToMany
+	@JoinTable(name = "salaFilme_Cinema", 
+	joinColumns = @JoinColumn(name = "salaFilme_id"), 
+	inverseJoinColumns = @JoinColumn(name = "filme_id")
+	)
 
-	public Filme() {
+	private List<Filme> filmes = new ArrayList<>();
+
+	public SalaCinema() {
 
 	}
 
-	public Filme(Integer id, String nomefilme) {
+	public SalaCinema(Integer id, String hora) {
 		super();
-		this.id = id;
-		this.nomefilme = nomefilme;
-
+		this.setId(id);
+		this.setHora(hora);
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
+	public List<Filme> getFilmes() {
+		return filmes;
+	}
+
+	public void setFilmes(List<Filme> filmes) {
+		this.filmes = filmes;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getNomefilme() {
-		return nomefilme;
+	public String getHora() {
+		return hora;
 	}
 
-	public void setNomefilme(String nomefilme) {
-		this.nomefilme = nomefilme;
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 
 	@Override
@@ -65,7 +80,7 @@ public class Filme implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Filme other = (Filme) obj;
+		SalaCinema other = (SalaCinema) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -74,11 +89,4 @@ public class Filme implements Serializable {
 		return true;
 	}
 
-	public List<SalaCinema> getFilmes() {
-		return filmes;
-	}
-
-	public void setFilmes(List<SalaCinema> filmes) {
-		this.filmes = filmes;
-	}
 }
