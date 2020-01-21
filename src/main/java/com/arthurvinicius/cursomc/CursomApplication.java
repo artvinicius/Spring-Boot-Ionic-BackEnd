@@ -29,12 +29,12 @@ public class CursomApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Filme cat1 = new Filme(20191002, "Coringa");
-		Filme cat2 = new Filme(20201000, "O Irlandês");
+		Filme cat1 = new Filme(null, "Coringa");
+		Filme cat2 = new Filme(null, "O Irlandês");
 
-		SalaCinema s1 = new SalaCinema(202001, "14:00 PM");
-		SalaCinema s2 = new SalaCinema(202002, "18:00 PM | 19:45PM");
-		SalaCinema s3 = new SalaCinema(202003, "20:10 PM");
+		SalaCinema s1 = new SalaCinema(null, "14:00 PM");
+		SalaCinema s2 = new SalaCinema(null, "18:00 PM | 19:45PM");
+		SalaCinema s3 = new SalaCinema(null, "20:10 PM");
 
 		cat1.getFilmes().addAll((Collection<? extends SalaCinema>) Arrays.asList(s1, s2, s3));
 		cat2.getFilmes().addAll((Collection<? extends SalaCinema>) Arrays.asList(s2));

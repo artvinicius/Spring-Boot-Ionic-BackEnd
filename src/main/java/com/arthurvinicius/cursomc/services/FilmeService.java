@@ -15,7 +15,8 @@ public class FilmeService {
 	private FilmeRepositorys repo;
 
 	public Filme find(Integer id) {
-		Optional <Filme>obj = repo.findById(id);
-		return obj.orElse(null);
+		Optional<Filme> obj = repo.findById(id);
+		return obj.orElseThrow(() -> new com.arthurvinicius.cursomc.services.exceptions.ObjectNotFoundException(
+				"Objeto não encontrado ! Id: " + id + ", Tipo: " + Filme.class.getName()));
 	}
 }

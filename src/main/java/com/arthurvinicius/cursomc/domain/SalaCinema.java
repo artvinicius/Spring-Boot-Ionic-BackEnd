@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class SalaCinema implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,11 +24,9 @@ public class SalaCinema implements Serializable {
 	private Integer id;
 	private String hora;
 
+	@JsonBackReference
 	@ManyToMany
-	@JoinTable(name = "salaFilme_Cinema", 
-	joinColumns = @JoinColumn(name = "salaFilme_id"), 
-	inverseJoinColumns = @JoinColumn(name = "filme_id")
-	)
+	@JoinTable(name = "salaFilme_Cinema", joinColumns = @JoinColumn(name = "salaFilme_id"), inverseJoinColumns = @JoinColumn(name = "filme_id"))
 
 	private List<Filme> filmes = new ArrayList<>();
 
