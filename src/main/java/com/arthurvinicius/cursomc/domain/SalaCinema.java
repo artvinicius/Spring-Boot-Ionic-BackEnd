@@ -2,7 +2,9 @@ package com.arthurvinicius.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -23,21 +26,45 @@ public class SalaCinema implements Serializable {
 
 	private Integer id;
 	private String hora;
+	private double preco;
 
 	@JsonBackReference
 	@ManyToMany
-	@JoinTable(name = "salaFilme_Cinema", joinColumns = @JoinColumn(name = "salaFilme_id"), inverseJoinColumns = @JoinColumn(name = "filme_id"))
+	@JoinTable(name = "salaFilme_Cinema", 
+	joinColumns = @JoinColumn(name = "salaFilme_id"), 
+	inverseJoinColumns = @JoinColumn(name = "filme_id"))
 
 	private List<Filme> filmes = new ArrayList<>();
+
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> itens = new HashSet<>();
 
 	public SalaCinema() {
 
 	}
 
-	public SalaCinema(Integer id, String hora) {
+	public SalaCinema(final Integer id, final String hora, final Double preco) {
 		super();
 		this.setId(id);
 		this.setHora(hora);
+		this.setPreco(preco);
+	}
+
+public List<SalaCinema> getsalaCinemas(){
+	List<SalaCinema> lista = new ArrayList<>();
+	for (ItemPedido x : itens){
+		lista.add(x.getSalaCinema());
+	}
+	return lista;
+}
+
+
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(final double preco) {
+		this.preco = preco;
 	}
 
 	public Integer getId() {
@@ -48,11 +75,11 @@ public class SalaCinema implements Serializable {
 		return filmes;
 	}
 
-	public void setFilmes(List<Filme> filmes) {
+	public void setFilmes(final List<Filme> filmes) {
 		this.filmes = filmes;
 	}
 
-	public void setId(Integer id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 
@@ -60,8 +87,16 @@ public class SalaCinema implements Serializable {
 		return hora;
 	}
 
-	public void setHora(String hora) {
+	public void setHora(final String hora) {
 		this.hora = hora;
+	}
+
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(final Set<ItemPedido> itens) {
+		this.itens = itens;
 	}
 
 	@Override
@@ -73,14 +108,14 @@ public class SalaCinema implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SalaCinema other = (SalaCinema) obj;
+		final SalaCinema other = (SalaCinema) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
