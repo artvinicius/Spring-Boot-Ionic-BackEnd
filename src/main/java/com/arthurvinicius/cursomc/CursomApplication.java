@@ -67,15 +67,15 @@ public class CursomApplication implements CommandLineRunner {
 		Filme cat1 = new Filme(null, "Coringa");
 		Filme cat2 = new Filme(null, "O Irlandês");
 
-		SalaCinema s1 = new SalaCinema(12345, "14:00 PM", null);
-		SalaCinema s2 = new SalaCinema(12346, "18:00 PM", null);
-		SalaCinema s3 = new SalaCinema(12347, "20:10 PM", null);
+		SalaCinema s1 = new SalaCinema(12345, "14:00 PM", 23.0);
+		SalaCinema s2 = new SalaCinema(12346, "18:00 PM", 30.0);
+		SalaCinema s3 = new SalaCinema(12347, "20:10 PM", 23.0);
 
-		cat1.getFilmes().addAll((Collection<? extends SalaCinema>) Arrays.asList(s1, s2, s3));
+		cat1.getFilmes().addAll((Collection<? extends SalaCinema>) Arrays.asList(s1, s3));
 		cat2.getFilmes().addAll((Collection<? extends SalaCinema>) Arrays.asList(s2));
 
 		s1.getFilmes().addAll(Arrays.asList(cat1));
-		s2.getFilmes().addAll(Arrays.asList(cat1));
+		s2.getFilmes().addAll(Arrays.asList(cat2));
 		s3.getFilmes().addAll(Arrays.asList(cat1));
 
 		filmeRepositorys.saveAll(Arrays.asList(cat1, cat2));

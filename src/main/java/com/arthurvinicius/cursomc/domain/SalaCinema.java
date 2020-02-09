@@ -26,7 +26,7 @@ public class SalaCinema implements Serializable {
 
 	private Integer id;
 	private String hora;
-	private double preco;
+	private Double preco;
 
 	@JsonBackReference
 	@ManyToMany
@@ -36,7 +36,7 @@ public class SalaCinema implements Serializable {
 
 	private List<Filme> filmes = new ArrayList<>();
 
-	@OneToMany(mappedBy = "id.produto")
+	@OneToMany(mappedBy = "id.salaCinema")
 	private Set<ItemPedido> itens = new HashSet<>();
 
 	public SalaCinema() {
@@ -45,25 +45,24 @@ public class SalaCinema implements Serializable {
 
 	public SalaCinema(final Integer id, final String hora, final Double preco) {
 		super();
-		this.setId(id);
-		this.setHora(hora);
-		this.setPreco(preco);
+		this.id = id;
+		this.hora = hora;
+		this.preco = preco;
 	}
 
-public List<SalaCinema> getsalaCinemas(){
-	List<SalaCinema> lista = new ArrayList<>();
-	for (ItemPedido x : itens){
-		lista.add(x.getSalaCinema());
+	public List<Pedido> getPedidos() {
+		List<Pedido> lista = new ArrayList<>();
+		for (ItemPedido x : itens) {
+			lista.add(x.getPedido());
+		}
+		return lista;
 	}
-	return lista;
-}
 
-
-	public double getPreco() {
+	public Double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(final double preco) {
+	public void setPreco(final Double preco) {
 		this.preco = preco;
 	}
 
