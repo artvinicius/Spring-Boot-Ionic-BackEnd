@@ -9,6 +9,7 @@ import com.arthurvinicius.cursomc.domain.Cliente;
 import com.arthurvinicius.cursomc.domain.Endereco;
 import com.arthurvinicius.cursomc.domain.Estado;
 import com.arthurvinicius.cursomc.domain.Filme;
+import com.arthurvinicius.cursomc.domain.ItemPedido;
 import com.arthurvinicius.cursomc.domain.Pagamento;
 import com.arthurvinicius.cursomc.domain.PagamentoComBoleto;
 import com.arthurvinicius.cursomc.domain.PagamentoComCartao;
@@ -21,6 +22,7 @@ import com.arthurvinicius.cursomc.repositories.ClienteRepository;
 import com.arthurvinicius.cursomc.repositories.EnderecoRepository;
 import com.arthurvinicius.cursomc.repositories.EstadoRepository;
 import com.arthurvinicius.cursomc.repositories.FilmeRepositorys;
+import com.arthurvinicius.cursomc.repositories.ItemPedidoRepository;
 import com.arthurvinicius.cursomc.repositories.PagamentoRepository;
 import com.arthurvinicius.cursomc.repositories.PedidoRepository;
 import com.arthurvinicius.cursomc.repositories.SalaCinemaRepositorys;
@@ -56,6 +58,9 @@ public class CursomApplication implements CommandLineRunner {
 
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomApplication.class, args);
@@ -110,18 +115,32 @@ public class CursomApplication implements CommandLineRunner {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2019 10:55"), cli1, e1);
-		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2019 19:35"), cli1, e2);
+		Pedido ped2 = new Pedido(null, sdf.parse("20/01/2020 19:35"), cli1, e2);
 
 		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		ped1.setPagamento(pagto1);
 
-		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2019 00:00"), null);
+		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2019 00:00"),
+				null);
 		ped2.setPagamento(pagto2);
 
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+
+		ItemPedido ip1 = new ItemPedido(ped1, s1, 0.00, 2, 23.0);
+		ItemPedido ip2 = new ItemPedido(ped1, s3, 0.00, 3, 30.0);
+		ItemPedido ip3 = new ItemPedido(ped2, s2, 23.0, 2, 23.0);
+
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+
+		s1.getItens().addAll(Arrays.asList(ip1));
+		s2.getItens().addAll(Arrays.asList(ip3));
+		s3.getItens().addAll(Arrays.asList(ip2));
+
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 
 	}
 
