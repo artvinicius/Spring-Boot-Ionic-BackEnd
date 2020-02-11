@@ -19,4 +19,10 @@ public class FilmeService {
 		return obj.orElseThrow(() -> new com.arthurvinicius.cursomc.services.exceptions.ObjectNotFoundException(
 				"Objeto não encontrado ! Id: " + id + ", Tipo: " + Filme.class.getName()));
 	}
+
+	public Filme insert(Filme obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
+
 }
