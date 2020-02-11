@@ -22,7 +22,7 @@ public class FilmeResource {
 	private FilmeService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Filme> find(@PathVariable Integer id) {
 		Filme obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 
@@ -37,4 +37,11 @@ public class FilmeResource {
 	
 	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Filme obj, @PathVariable Integer id){
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
 }

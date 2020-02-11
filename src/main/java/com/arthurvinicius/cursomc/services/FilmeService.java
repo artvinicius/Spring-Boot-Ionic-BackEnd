@@ -25,4 +25,9 @@ public class FilmeService {
 		return repo.save(obj);
 	}
 
+	public Filme update(Filme obj) {
+		find(obj.getId());
+		return repo.save(obj);
+	}
+
 }
