@@ -72,9 +72,9 @@ public class CursomApplication implements CommandLineRunner {
 		Filme cat1 = new Filme(null, "Coringa");
 		Filme cat2 = new Filme(null, "O Irlandês");
 
-		SalaCinema s1 = new SalaCinema(12345, "14:00 PM", 23.0);
-		SalaCinema s2 = new SalaCinema(12346, "18:00 PM", 30.0);
-		SalaCinema s3 = new SalaCinema(12347, "20:10 PM", 23.0);
+		SalaCinema s1 = new SalaCinema(null, "14:00 PM", 23.00);
+		SalaCinema s2 = new SalaCinema(null, "18:00 PM", 30.00);
+		SalaCinema s3 = new SalaCinema(null, "20:10 PM", 23.00);
 
 		cat1.getFilmes().addAll((Collection<? extends SalaCinema>) Arrays.asList(s1, s3));
 		cat2.getFilmes().addAll((Collection<? extends SalaCinema>) Arrays.asList(s2));
@@ -117,7 +117,7 @@ public class CursomApplication implements CommandLineRunner {
 		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2019 10:55"), cli1, e1);
 		Pedido ped2 = new Pedido(null, sdf.parse("20/01/2020 19:35"), cli1, e2);
 
-		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 2);
 		ped1.setPagamento(pagto1);
 
 		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2019 00:00"),
@@ -129,9 +129,9 @@ public class CursomApplication implements CommandLineRunner {
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
 
-		ItemPedido ip1 = new ItemPedido(ped1, s1, 0.00, 2, 23.0);
-		ItemPedido ip2 = new ItemPedido(ped1, s3, 0.00, 3, 30.0);
-		ItemPedido ip3 = new ItemPedido(ped2, s2, 23.0, 2, 23.0);
+		ItemPedido ip1 = new ItemPedido(ped1, s1, 0.00, 2, 23.00);
+		ItemPedido ip2 = new ItemPedido(ped1, s3, 0.00, 3, 30.00);
+		ItemPedido ip3 = new ItemPedido(ped2, s2, 23.0, 2, 23.00);
 
 		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
 		ped2.getItens().addAll(Arrays.asList(ip3));

@@ -30,9 +30,7 @@ public class SalaCinema implements Serializable {
 
 	@JsonBackReference
 	@ManyToMany
-	@JoinTable(name = "salaFilme_Cinema", 
-	joinColumns = @JoinColumn(name = "salaFilme_id"), 
-	inverseJoinColumns = @JoinColumn(name = "filme_id"))
+	@JoinTable(name = "SALACINEMA_FILME", joinColumns = @JoinColumn(name = "salaCinema_id"), inverseJoinColumns = @JoinColumn(name = "filme_id"))
 
 	private List<Filme> filmes = new ArrayList<>();
 
@@ -43,7 +41,7 @@ public class SalaCinema implements Serializable {
 
 	}
 
-	public SalaCinema(final Integer id, final String hora, final Double preco) {
+	public SalaCinema(Integer id, String hora, Double preco) {
 		super();
 		this.id = id;
 		this.hora = hora;
@@ -94,7 +92,7 @@ public class SalaCinema implements Serializable {
 		return itens;
 	}
 
-	public void setItens(final Set<ItemPedido> itens) {
+	public void setItens(Set<ItemPedido> itens) {
 		this.itens = itens;
 	}
 

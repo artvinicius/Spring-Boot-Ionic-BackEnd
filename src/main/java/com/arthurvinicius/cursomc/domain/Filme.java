@@ -19,7 +19,7 @@ public class Filme implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nomefilme;
+	private String nomeFilme;
 
 	
 	@JsonManagedReference
@@ -33,7 +33,7 @@ public class Filme implements Serializable {
 	public Filme(Integer id, String nomefilme) {
 		super();
 		this.id = id;
-		this.nomefilme = nomefilme;
+		this.nomeFilme = nomefilme;
 
 	}
 
@@ -46,11 +46,11 @@ public class Filme implements Serializable {
 	}
 
 	public String getNomefilme() {
-		return nomefilme;
+		return nomeFilme;
 	}
 
 	public void setNomefilme(String nomefilme) {
-		this.nomefilme = nomefilme;
+		this.nomeFilme = nomefilme;
 	}
 
 	@Override
