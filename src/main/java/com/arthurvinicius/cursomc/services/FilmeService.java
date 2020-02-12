@@ -1,5 +1,6 @@
 package com.arthurvinicius.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,13 @@ public class FilmeService {
 		find(id);
 		try {
 			repo.deleteById(id);
-		} 
-		catch (DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 			throw new DataintegrityException("Não é possível excluir um Filme que possui uma Sala de Cinema");
 		}
 
 	}
 
+	public List<Filme> findAll() {
+		return repo.findAll();
+	}
 }
