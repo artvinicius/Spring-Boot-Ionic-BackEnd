@@ -3,13 +3,17 @@ package com.arthurvinicius.cursomc.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Service;
-
 import com.arthurvinicius.cursomc.domain.Filme;
+import com.arthurvinicius.cursomc.dto.FilmeDTO;
 import com.arthurvinicius.cursomc.repositories.FilmeRepositorys;
 import com.arthurvinicius.cursomc.services.exceptions.DataintegrityException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.stereotype.Service;
 
 @Service
 public class FilmeService {
@@ -45,5 +49,16 @@ public class FilmeService {
 
 	public List<Filme> findAll() {
 		return repo.findAll();
+
+	}
+
+	public Page<Filme> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repo.findAll(pageRequest);
+
+	}
+
+	public Filme fromDTO(FilmeDTO objDto){
+		return new Filme(objDto.getId(), objDto.getNomeFilme());
 	}
 }
