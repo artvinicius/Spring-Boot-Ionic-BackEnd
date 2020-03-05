@@ -33,8 +33,9 @@ public class FilmeService {
 	}
 
 	public Filme update(Filme obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		Filme newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 
 	public void delete(Integer id) {
@@ -58,7 +59,13 @@ public class FilmeService {
 
 	}
 
-	public Filme fromDTO(FilmeDTO objDto){
+	public Filme fromDTO(FilmeDTO objDto) {
 		return new Filme(objDto.getId(), objDto.getNomeFilme());
 	}
+
+	private void updateData(Filme newObj, Filme obj) {
+		newObj.setNomefilme(obj.getNomefilme());
+
+	}
+
 }
