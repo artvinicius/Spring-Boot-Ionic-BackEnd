@@ -1,0 +1,13 @@
+{
+	"nome" : "Teste De agora",
+	"email" : "Arthurasdasd@gmmail.com",
+	"cpfOuCnpj" : "38216899002157",
+	"tipo" : 2,
+	"telefone1" : "456654456",
+	"telefone2" : "25845632",
+	"longadouro" : "Rua AlbraxASSD",
+	"numero" : "357",
+	"complemento" : "Casa 789",
+	"cep" : "45632121",
+	"cidadeId" : 2
+}
